@@ -8,8 +8,5 @@ setup(
     author='Grzegorz Skoraczynski',
     license='MIT',
     python_requires=">=3.9",
-    install_requires=["rdkit"],
-    # entry_points={
-    #     'console_scripts': ['align=Alignstein.command_line:main'],
-    # },
+    install_requires=["rdkit"]
 )

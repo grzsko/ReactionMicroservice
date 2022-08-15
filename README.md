@@ -2,9 +2,10 @@
 A microservice in Python that would run the reaction SMARTS on reactants supplied in SMILES
 
 ## Installation
-1. Create a conda environment (skip if you have already an environment with `rdkit`):
+1. Create and activate conda environment (skip if you have already an environment with `rdkit`):
 ```bash
 conda env create -f reaction.yml
+conda activate reaction
 ```
 2. Install this package into your environment.
 ```bash

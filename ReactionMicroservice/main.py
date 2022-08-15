@@ -1,8 +1,6 @@
-from typing import List
-
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from rdkit.Chem.rdchem import Mol
+
 
 SMILES = str
 SMARTS = str
@@ -30,12 +28,24 @@ def run_reaction(reactants: list[SMILES], reaction: SMARTS,
     """
     # Parse reactants
     mols = []
-    for reactant in reactants:
-        reactant = reactant.split(".")
-        mols.extend([Chem.MolFromSmiles(s) for s in reactant])
+    try:
+        for reactant in reactants:
+            reactant = reactant.split(".")
+            reactant_mol = [Chem.MolFromSmiles(s) for s in reactant]
+            if None in reactant_mol:
+                raise ValueError("Something incorrect in SMILES")
+            mols.extend([Chem.MolFromSmiles(s) for s in reactant])
+    except ValueError as e:
+        raise Exception('Incorrect reactant') from e
 
     # Parse reaction
-    rxn = AllChem.ReactionFromSmarts(reaction)
+    try:
+        rxn = AllChem.ReactionFromSmarts(reaction)
+        if rxn is None:
+            raise ValueError("Something incorrect in SMARTS")
+    except ValueError as e:
+        raise Exception('Incorrect reaction SMART') from e
+    
     # Run the reaction
     products = rxn.RunReactants(mols)
 

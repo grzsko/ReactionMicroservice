@@ -7,7 +7,7 @@ SMARTS = str
 
 
 def run_reaction(reactants: list[SMILES], reaction: SMARTS,
-                 products_limit: object = 1) \
+                 products_limit: int = 1) \
         -> list[list[SMILES]]:
     """Run reaction for given list of reactants and reaction.
 
